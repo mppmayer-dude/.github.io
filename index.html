@@ -1,0 +1,288 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pediatric Rehab Consulting - Matthew Mayer, MD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        .contact-info {
+            background-color: #0056b3;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            background-color: #333;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 1rem;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: block;
+        }
+        nav ul li a:hover {
+            background-color: #007bff;
+        }
+        section {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2, h3 {
+            color: #007bff;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+        }
+        @media (max-width: 600px) {
+            nav ul li {
+                display: block;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-info">
+        <p><strong>Contact:</strong> Mayer@pedsrehabconsult.com</p>
+    </div>
+    <header>
+        <h1>Pediatric Rehab Consulting</h1>
+        <h2>Matthew Mayer, MD, FABMR</h2>
+        <p>Board-Certified Pediatric Rehabilitation Medicine Specialist</p>
+        <p>Expert Medical Legal Consulting Services</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#cv">Curriculum Vitae</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <h2>About Dr. Matthew Mayer</h2>
+        <p>Dr. Matthew Mayer is an accomplished Associate Professor of Clinical Practice in the Department of Physical Medicine & Rehabilitation at the University of Colorado School of Medicine and an attending physician at Children’s Hospital Colorado. With over 15 years of experience in pediatric rehabilitation medicine, Dr. Mayer specializes in helping children with physical impairments achieve maximum development and independent function. His holistic, patient-centered approach has earned him high praise, including multiple patient satisfaction awards.</p>
+        <p>Through Pediatric Rehab Consulting, Dr. Mayer leverages his extensive clinical, academic, and leadership expertise to provide objective, evidence-based medical legal consulting for cases involving pediatric rehabilitation, trauma, and disability. His background ensures reliable testimony and consultations grounded in real-world medical practice.</p>
+    </section>
+
+    <section id="services">
+        <h2>Services</h2>
+        <p>Pediatric Rehab Consulting offers tailored medical legal consulting services, drawing on Dr. Mayer’s deep expertise in pediatric rehabilitation to support attorneys, insurers, and organizations. Services include:</p>
+        <ul>
+            <li>Expert Witness Testimony in pediatric rehabilitation, trauma, and disability cases</li>
+            <li>Independent Medical Examinations (IMEs)</li>
+            <li>Case File Reviews and Medical Record Analysis</li>
+            <li>Consultation on Treatment Plans, Prognosis, and Long-Term Outcomes</li>
+        </ul>
+        <p>Available for cases nationwide, with a focus on ethical, unbiased assessments.</p>
+    </section>
+
+    <section id="expertise">
+        <h2>Clinical Expertise & Conditions Treated</h2>
+        <p>Dr. Mayer’s practice encompasses a wide range of pediatric conditions, making him a valuable resource for complex medical legal matters. Key areas include:</p>
+        <h3>Conditions</h3>
+        <ul>
+            <li>Cerebral Palsy & Movement Disorders</li>
+            <li>Neuromuscular Diseases</li>
+            <li>Traumatic & Acquired Brain Injuries</li>
+            <li>Stroke & Spine Conditions</li>
+            <li>Trauma/Nerve Injuries</li>
+            <li>Gait Abnormalities & Muscle Weakness</li>
+            <li>Other: Anemia, Arthritis, Asthma, Ataxia, and more</li>
+        </ul>
+        <h3>Procedures & Skills</h3>
+        <ul>
+            <li>EMG (Electromyography)</li>
+            <li>Non-Cosmetic Chemodenervation</li>
+            <li>Orthotics Prescriptions & Adaptive Equipment Recommendations</li>
+            <li>Therapy & Rehabilitation Planning</li>
+        </ul>
+        <p><strong>Care Philosophy:</strong> Dr. Mayer prioritizes improving function and quality of life through individualized, holistic treatment, always placing the best interests of patients and families first.</p>
+    </section>
+
+    <section id="cv">
+        <h2>Curriculum Vitae</h2>
+        <h3>Education</h3>
+        <ul>
+            <li>1996–2000, B.A., Bryn Athyn College, Philadelphia, PA</li>
+            <li>2001–2005, M.D., University of Cincinnati College of Medicine, Cincinnati, OH</li>
+            <li>2005–2010, Double Boarded Residency Program, Combined Residencies in Pediatrics / Physical Medicine and Rehabilitation, University of Cincinnati / Cincinnati Children’s Hospital</li>
+        </ul>
+        <h3>Academic Appointments</h3>
+        <ul>
+            <li>2010–2016, Assistant Professor, University of Missouri-Kansas City, Department of Pediatrics</li>
+            <li>2010–2016, Clinical Instructor, University of Kansas, Department of Physical Medicine and Rehabilitation</li>
+            <li>2013, Assistant Fellowship Program Director, Pediatric Physical Medicine and Rehabilitation, Children’s Mercy Hospital, Kansas City, MO</li>
+            <li>2014–2016, Fellowship Program Director, Pediatric Physical Medicine and Rehabilitation, Children’s Mercy Hospital, Kansas City, MO</li>
+            <li>2016–2018, Visiting Associate Professor, University of Colorado, Department of Physical Medicine and Rehabilitation</li>
+            <li>2018–present, Associate Professor of Clinical Practice, University of Colorado, Department of Physical Medicine and Rehabilitation</li>
+        </ul>
+        <h3>Hospital & Professional Positions</h3>
+        <ul>
+            <li>2010–2016, Attending Physician, Children’s Mercy Kansas City, Kansas City, MO</li>
+            <li>2010–2016, Director, Pediatric Electromyography Clinic, Children’s Mercy Kansas City (AANEM lab certification for clinical excellence)</li>
+            <li>2014–2016, Director, Multidisciplinary Neuromuscular Clinic, Children’s Mercy Kansas City (Parent Project Muscular Dystrophy Certified Duchenne Care Center)</li>
+            <li>2016–present, Attending Physician, Children’s Hospital Colorado, Aurora, CO</li>
+            <li>2016–present, Director, Pediatric Electromyography Clinic, Children’s Hospital Colorado</li>
+            <li>2016–2024, Director, Denver Health Pediatric Rehabilitation Clinic</li>
+            <li>2017–2020, Director, Rehabilitation Inpatient Consult Service, Children’s Hospital Colorado</li>
+            <li>2020–present, Clinical Informatics Medical Director for Rehabilitation Service Line, Children’s Hospital Colorado (Epic Physician Power User Certification, 2020; Epic Physician Builder Certification, 2022)</li>
+            <li>2020–present, Ambulatory Medical Director, Children’s Hospital Colorado North Campus (5-Star Patient Satisfaction Award, 2022, 2024; 4-Star Patient Satisfaction Award, 2023)</li>
+            <li>2025–present, Ambulatory Medical Director, Department of Pediatric Rehabilitation Medicine</li>
+        </ul>
+        <h3>Honors & Awards</h3>
+        <ul>
+            <li>2002, Indian Health Services Summer Internship, Navajo Nation Reservation</li>
+            <li>2005, Randall Braddom Outstanding Medical Student Award, University of Cincinnati</li>
+            <li>2008, International Pediatric Externship Scholarship, University of Kwazulu Natal, South Africa</li>
+            <li>2011, Faculty Teacher of the Year Award, University of Kansas</li>
+            <li>2012–2014, National Health Service Corps, U.S. Department of Health and Human Services</li>
+            <li>2014, Best Pediatric Poster Award, American Academy of Physical Medicine and Rehabilitation</li>
+            <li>2015, Bryn Athyn College Distinguished Alumni Award</li>
+            <li>2015, Top Poster Award, American Congress of Rehabilitation Medicine</li>
+            <li>2015, Quality Improvement Award, Children’s Mercy Kansas City</li>
+            <li>2016, Golden Apple Fellow Mentorship Award, University of Missouri-Kansas City</li>
+            <li>2021, Top 10% Patient Satisfaction Award, 4.87 of 5 Star Rating, Children’s Hospital Colorado</li>
+            <li>2022, Top 20% Patient Satisfaction Award, 4.81 of 5 Star Rating, Children’s Hospital Colorado</li>
+            <li>2024, Teammate of the Year, Dream On 3, Denver, Colorado</li>
+        </ul>
+        <h3>Professional Memberships</h3>
+        <ul>
+            <li>2005–present, American Academy of Pediatrics, Council on Children with Disabilities</li>
+            <li>2005–present, American Academy of Physical Medicine and Rehabilitation, Council for Pediatric Rehabilitation (AAPM&R Epic Steering Board Member, 2024–present)</li>
+            <li>2008–2020, American Academy of Cerebral Palsy and Developmental Medicine</li>
+            <li>2011–2016, American Association of Neuromuscular and Electrodiagnostic Medicine, Council for Pediatrics</li>
+        </ul>
+        <h3>Major Committee & Service Responsibilities</h3>
+        <ul>
+            <li>2007–2010, Member, Pediatric Residency Leadership Council, Cincinnati Children’s Hospital</li>
+            <li>2010–2016, Member, Medical Education Committee, University of Missouri-Kansas City</li>
+            <li>2010–2016, Member, Clinical Competency Committee, University of Missouri-Kansas City</li>
+            <li>2010–2016, Member, Pediatric Rehabilitation Fellowship Selection Committee, University of Missouri-Kansas City</li>
+            <li>2011–2014, Member, Pediatric Rehabilitation Inpatient Rehabilitation Committee, University of Missouri-Kansas City</li>
+            <li>2010–2013, Member, Neuromuscular Committee, Children’s Mercy Hospital Kansas City</li>
+            <li>2011–2013, Guest Member, Medical Staff Council on Ethics, Children’s Mercy Hospital Kansas City</li>
+            <li>2012–2014, Member, Anticoagulation Management Council, Children’s Mercy Hospital Kansas City</li>
+            <li>2013–2016, Chair, Neuromuscular Committee, Children’s Mercy Hospital Kansas City</li>
+            <li>2013–2016, Member, Medical Staff Council on Ethics, Children’s Mercy Hospital Kansas City</li>
+            <li>2014–2015, Team Leader, Pediatric Rehabilitation Clinic Quality Improvement Committee, University of Missouri-Kansas City</li>
+            <li>2014, Sports Classifier, USA Paralympic Ski and Snowboarding</li>
+            <li>2014, Head Boccia Sports Classifier, National Veterans Wheelchair Games</li>
+            <li>2014–present, Head Physician Sports Classifier, USA Paralympic Boccia National Competition</li>
+            <li>2014–2021, Member, USA Boccia Sports Classification Committee</li>
+            <li>2015–2016, Board Member, Variety Children’s Charity of Kansas City</li>
+            <li>2015–2019, Member, Medical Education Committee for Self-Assessment Examination, American Academy of Physical Medicine and Rehabilitation</li>
+            <li>2013–2016, Member, Ethics and Peer Review Committee, American Academy of Neuromuscular and Electrodiagnostic Medicine</li>
+            <li>2016–present, Member, Pediatric Rehabilitation Fellowship Selection Committee, University of Colorado</li>
+            <li>2016–2019, Member, Medical Education Committee, University of Colorado</li>
+            <li>2016–2018, Member, Pediatric Ethics Committee, Children’s Hospital Colorado</li>
+            <li>2016–present, Co-Chair, PICU Early Mobilization Multidisciplinary Work Group, Children’s Hospital Colorado</li>
+            <li>2017–2018, Member, Clinical Pathway Development Committee for Traumatic Brain Injury, Children’s Hospital Colorado</li>
+            <li>2019, Member, Department Finance and Incentive Sub-committee, University of Colorado</li>
+            <li>2020–present, Member, Clinical Informaticist Committee, Children’s Hospital Colorado</li>
+            <li>2021, Director of Classification, USA Paralympic Boccia National Competition, Gardener, KS</li>
+            <li>2022–present, Member, Physician Builder Committee, Children’s Hospital Colorado</li>
+            <li>2022–present, Member, US Olympic and Paralympic Committee, USA National Boccia Physician Classifier, Chair Classification Committee</li>
+            <li>2024–present, PM&R Representative, Faculty Senate, University of Colorado School of Medicine</li>
+        </ul>
+        <h3>Licensure & Board Certifications</h3>
+        <ul>
+            <li>2002–2005, USMLE Steps I, II, III</li>
+            <li>2008–2010, State Medical Board of Ohio License</li>
+            <li>2010–2016, Missouri Board of Healing Arts License</li>
+            <li>2010–2016, Kansas State Medical Board License</li>
+            <li>2016–present, Colorado State Medical Board License</li>
+            <li>2009–present, Board Certified Diplomate, American Board of Pediatrics</li>
+            <li>2011–present, Board Certified Diplomate, American Board of Physical Medicine & Rehabilitation</li>
+            <li>2018–present, Board Certified in Pediatric Rehabilitation Medicine, American Board of Physical Medicine and Rehabilitation</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Ready to discuss your case? Reach out to schedule a consultation with Pediatric Rehab Consulting.</p>
+        <ul>
+            <li><strong>Email:</strong> Mayer@pedsrehabconsult.com</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Pediatric Rehab Consulting. All rights reserved.</p>
+    </footer>
+</body>
+</html>
