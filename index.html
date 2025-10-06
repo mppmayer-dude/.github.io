@@ -6,15 +6,19 @@
     <title>Pediatric Rehab Consulting LLC | Matthew Mayer, MD, FAAP, FAAPMR</title>
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; color: #333; background-color: #f4f4f4; }
-        header { background-color: #007bff; color: white; text-align: center; padding: 20px; }
-        .logo { max-width: 200px; height: auto; margin-bottom: 10px; }
+        header { background-color: #007bff; color: white; padding: 20px; display: flex; align-items: center; justify-content: center; gap: 20px; text-align: left; }
+        .header-content { max-width: 900px; width: 100%; display: flex; align-items: center; gap: 20px; }
+        .logo { max-width: 200px; height: auto; flex-shrink: 0; }
+        .header-text { flex: 1; text-align: left; }
         nav { background-color: #0056b3; padding: 10px; }
         nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; flex-wrap: wrap; }
         nav li { margin: 0 15px; }
         nav a { color: white; text-decoration: none; font-weight: bold; }
         nav a:hover { text-decoration: underline; }
         main { max-width: 900px; margin: 20px auto; padding: 20px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .profile-img { max-width: 250px; height: auto; border-radius: 50%; display: block; margin: 20px auto; border: 4px solid #007bff; }
+        .about-content { display: flex; align-items: flex-start; gap: 20px; margin-top: 10px; }
+        .profile-img { max-width: 250px; height: auto; border-radius: 50%; border: 4px solid #007bff; flex-shrink: 0; }
+        .about-text { flex: 1; }
         section { margin-bottom: 40px; }
         h2 { color: #007bff; border-bottom: 2px solid #28a745; padding-bottom: 5px; }
         .reviews { background-color: #e9ecef; padding: 15px; border-left: 4px solid #28a745; }
@@ -24,14 +28,24 @@
         footer { text-align: center; padding: 10px; background-color: #007bff; color: white; }
         a { color: #007bff; text-decoration: none; }
         a:hover { text-decoration: underline; }
-        @media (max-width: 600px) { nav ul { flex-direction: column; } nav li { margin: 5px 0; } }
+        @media (max-width: 600px) { 
+            header { flex-direction: column; text-align: center; }
+            .header-content { flex-direction: column; text-align: center; }
+            nav ul { flex-direction: column; } 
+            nav li { margin: 5px 0; }
+            .about-content { flex-direction: column; align-items: center; text-align: center; }
+        }
     </style>
 </head>
 <body>
     <header>
-        <img src="images/logo.png" alt="Pediatric Rehab Consulting LLC Logo" class="logo">
-        <h1>Matthew Mayer, MD, FAAP, FAAPMR</h1>
-        <p>Board-Certified Pediatric Rehabilitation Medicine Specialist<br>Expert Medical Legal Consulting Services</p>
+        <div class="header-content">
+            <img src="images/logo.png" alt="Pediatric Rehab Consulting LLC Logo" class="logo">
+            <div class="header-text">
+                <h1>Matthew Mayer, MD, FAAP, FAAPMR</h1>
+                <p>Board-Certified Pediatric Rehabilitation Medicine Specialist<br>Expert Medical Legal Consulting Services</p>
+            </div>
+        </div>
     </header>
 
     <nav>
@@ -48,12 +62,16 @@
     <main>
         <section id="about">
             <h2>About Dr. Matthew Mayer</h2>
-            <img src="images/profile-img.png" alt="Dr. Matthew Mayer" class="profile-img">
-            <p>Matthew Mayer, MD, FAAP, FAAPMR is an Associate Professor in the Department of Physical Medicine & Rehabilitation at the University of Colorado School of Medicine and an attending physician in Pediatric Rehabilitation Medicine at Children’s Hospital Colorado. With over 15 years of experience in pediatric rehabilitation medicine, Dr. Mayer specializes in helping children with physical impairments achieve maximum development and independent function. His holistic, patient-centered approach has earned him high praise, including multiple patient satisfaction awards.</p>
-            <p>Through Pediatric Rehab Consulting, Dr. Mayer leverages his extensive clinical, academic, and leadership expertise to provide objective, evidence-based medical legal consulting for cases involving pediatric rehabilitation, trauma, and disability. His background ensures reliable testimony and consultations grounded in real-world medical practice. He emphasizes improving function and quality of life, guiding therapy recommendations, orthotics prescriptions, adaptive equipment, and comprehensive medical management.</p>
-            <p><strong>Affiliations:</strong><br>
-            <a href="https://som.cuanschutz.edu/Profiles/Faculty/Profile/24260" target="_blank">University of Colorado Anschutz Medical Campus Profile</a><br>
-            <a href="https://www.childrenscolorado.org/doctors-and-departments/physicians/m/matthew-mayer/" target="_blank">Children's Hospital Colorado Profile</a></p>
+            <div class="about-content">
+                <img src="images/profile-img.png" alt="Dr. Matthew Mayer" class="profile-img">
+                <div class="about-text">
+                    <p>Matthew Mayer, MD, FAAP, FAAPMR is an Associate Professor in the Department of Physical Medicine & Rehabilitation at the University of Colorado School of Medicine and an attending physician in Pediatric Rehabilitation Medicine at Children’s Hospital Colorado. With over 15 years of experience in pediatric rehabilitation medicine, Dr. Mayer specializes in helping children with physical impairments achieve maximum development and independent function. His holistic, patient-centered approach has earned him high praise, including multiple patient satisfaction awards.</p>
+                    <p>Through Pediatric Rehab Consulting, Dr. Mayer leverages his extensive clinical, academic, and leadership expertise to provide objective, evidence-based medical legal consulting for cases involving pediatric rehabilitation, trauma, and disability. His background ensures reliable testimony and consultations grounded in real-world medical practice. He emphasizes improving function and quality of life, guiding therapy recommendations, orthotics prescriptions, adaptive equipment, and comprehensive medical management.</p>
+                    <p><strong>Affiliations:</strong><br>
+                    <a href="https://som.cuanschutz.edu/Profiles/Faculty/Profile/24260" target="_blank">University of Colorado Anschutz Medical Campus Profile</a><br>
+                    <a href="https://www.childrenscolorado.org/doctors-and-departments/physicians/m/matthew-mayer/" target="_blank">Children's Hospital Colorado Profile</a></p>
+                </div>
+            </div>
         </section>
 
         <section id="services">
@@ -93,10 +111,7 @@
         <section id="reviews">
             <h2>Patient Reviews & Awards</h2>
             <div class="reviews">
-                <p><strong>Patient Ratings:</strong> 5.0/5 stars (based on 1 review on Healthgrades and Vitals.com)</p>
-                <div class="review">
-                    <p>"Exceptional care – highly recommended for pediatric rehab." – Patient Review, Healthgrades</p>
-                </div>
+                <p><strong>Patient Satisfaction from Children's Hospital Colorado:</strong> Consistently high ratings through multiple awards for outstanding care.</p>
                 <h3>Awards & Recognitions</h3>
                 <ul>
                     <li>Top 10% Patient Satisfaction Award, 4.87/5 Stars, Children’s Hospital Colorado (2021)</li>
